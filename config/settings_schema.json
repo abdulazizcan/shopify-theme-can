@@ -1,0 +1,15 @@
+
+        [
+            {
+                "name": "theme_settings",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "example_text",
+                        "label": "Example Text Setting",
+                        "default": "This is an example."
+                    }
+                ]
+            }
+        ]
+    
