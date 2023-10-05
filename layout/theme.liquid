@@ -6,13 +6,30 @@
     <title>{{ shop.name }}</title>
     <link rel="stylesheet" href="{{ 'styles/main.css' | asset_url }}">
     <script src="{{ 'scripts/main.js' | asset_url }}"></script>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
     {{ content_for_header }}
   </head>
   <body role="main">
     <header>
       <h1>{{ shop.name }}</h1>
-      <nav>
-        <!-- Add navigation links here -->
+      <nav class="container mx-auto px-6 py-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <a class="text-white text-xl font-bold" href="{{ shop.url }}">{{ shop.name }}</a>
+          </div>
+          <div class="flex items-center">
+            {% for link in linklists['main-menu'].links %}
+              <a
+                class="text-gray-300 hover:text-white px-3 py-2 {{ link.active ? 'text-white font-bold' : '' }}"
+                href="{{ link.url }}"
+              >
+                {{- link.title -}}
+              </a>
+            {% endfor %}
+          </div>
+        </div>
       </nav>
     </header>
     <main>

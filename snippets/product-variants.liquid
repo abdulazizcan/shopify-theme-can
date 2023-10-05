@@ -1,0 +1,15 @@
+{% if product.options.size > 1 %}
+  <h2 class="text-lg font-bold mb-2">{{ 'products.product.options_heading' | t }}</h2>
+  <form method="post" action="/cart/add">
+    {% for option in product.options %}
+      <div class="mb-2">
+        <label for="option-{{ option.position }}">{{ option.name }}</label>
+        <select id="option-{{ option.position }}" name="options[{{ option.name }}]">
+          {% for value in option.values %}
+            <option value="{{ value }}">{{ value }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    {% endfor %}
+  </form>
+{% endif %}

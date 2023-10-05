@@ -1,0 +1,4 @@
+{% if product.price_varies %}
+  <span class="text-gray-600">{{ 'products.product.from_text' | t }}</span>
+{% endif %}
+<span class="text-gray-900 font-bold">{{ product.price | money }}</span>

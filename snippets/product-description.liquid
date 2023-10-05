@@ -1,0 +1,6 @@
+{% if product.description != blank %}
+  <div class="mb-2">
+    <h2 class="text-lg font-bold mb-2">{{ 'products.product.description_heading' | t }}</h2>
+    <div class="text-gray-700">{{ product.description }}</div>
+  </div>
+{% endif %}

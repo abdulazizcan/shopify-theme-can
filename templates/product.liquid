@@ -1,1 +1,93 @@
-// product.liquid for basic_shopify_theme
+{% layout 'theme' %}
+
+<div class="container mx-auto py-6">
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div class="col-span-2 md:col-span-1">
+      <div class="grid grid-cols-3 gap-2">
+        {% for image in product.images %}
+          <div class="col-span-1">
+            <img
+              src="{{ image.src | img_url: 'large' }}"
+              alt="{{ image.alt }}"
+              class="w-full h-auto cursor-pointer"
+              onclick="document.getElementById('featured-image').src='{{ image.src | img_url: 'large' }}'"
+            >
+          </div>
+        {% endfor %}
+      </div>
+      <img
+        id="featured-image"
+        src="{{ product.featured_image.src | img_url: 'large' }}"
+        alt="{{ product.featured_image.alt }}"
+        class="w-full h-auto mt-4"
+      >
+    </div>
+    <div class="col-span-2 md:col-span-2 lg:col-span-3">
+      <h1 class="text-2xl font-bold mb-6">{{ product.title }}</h1>
+      <div class="mb-6">
+        <span class="text-gray-900 font-bold">{{ product.price | money }}</span>
+      </div>
+      <div class="mb-6">
+        {{ product.description }}
+      </div>
+      {% include 'product-variation' %}
+
+      <div class="mb-6">
+        {% if product.options.size > 1 %}
+          <h2 class="text-lg font-bold mb-2">{{ 'products.product.options_heading' | t }}</h2>
+          <form method="post" action="/cart/add">
+            {% for option in product.options %}
+              <div class="mb-2">
+                <label for="option-{{ option.position }}">{{ option.name }}</label>
+                <select id="option-{{ option.position }}" name="options[{{ option.name }}]">
+                  {% for value in option.values %}
+                    <option value="{{ value }}">{{ value }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            {% endfor %}
+          </form>
+        {% endif %}
+      </div>
+      <div class="mb-6">
+        <form method="post" action="/cart/add">
+          {% if product.options.size == 1 %}
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+          {% else %}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            {% for option in product.options %}
+              <div class="mb-2">
+                <label for="option-{{ option.position }}">{{ option.name }}</label>
+                <select id="option-{{ option.position }}" name="options[{{ option.name }}]">
+                  {% for value in option.values %}
+                    {% assign variant = product.variants
+                      | where: 'option1', option.name
+                      | where: 'option2', value
+                      | first
+                    %}
+                    <option value="{{ variant.id }}">{{ value }} - {{ variant.price | money }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            {% endfor %}
+          {% endif %}
+          <div class="mb-2">
+            <label for="quantity">{{ 'products.product.quantity' | t }}</label>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              value="1"
+              min="1"
+              max="10"
+              class="w-16 px-2 py-1 border border-gray-400 rounded"
+            >
+          </div>
+          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            {{ 'products.product.add_to_cart' | t }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
