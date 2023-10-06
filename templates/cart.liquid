@@ -1,1 +1,56 @@
-// cart.liquid for basic_shopify_theme
+{% layout 'theme' %}
+
+<div class="container mx-auto py-6">
+  <h1 class="text-2xl font-bold mb-6">Your Cart</h1>
+  {% if cart.item_count == 0 %}
+    <p>Your cart is currently empty.</p>
+  {% else %}
+    <table class="w-full">
+      <thead>
+        <tr>
+          <th class="text-left font-bold">Product</th>
+          <th class="text-left font-bold">Price</th>
+          <th class="text-left font-bold">Quantity</th>
+          <th class="text-left font-bold">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart.items %}
+          <tr>
+            <td class="py-2">
+              <a href="{{ item.url }}" class="block">
+                <img
+                  src="{{ item.image.src | img_url: 'thumb' }}"
+                  alt="{{ item.image.alt }}"
+                  class="w-16 h-auto mr-4 inline-block"
+                >
+                <span class="inline-block">{{ item.product_title }}</span>
+              </a>
+            </td>
+            <td class="py-2">{{ item.price | money }}</td>
+            <td class="py-2">{{ item.quantity }}</td>
+            <td class="py-2">{{ item.line_price | money }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="text-right font-bold py-2">Subtotal:</td>
+          <td class="text-left font-bold py-2">{{ cart.total_price | money }}</td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="mt-6">
+      <a
+        href="/collections/all"
+        class="inline-block bg-blue-500 text-white py-2 px-4 rounded-lg font-bold hover:bg-blue-600 transition duration-200"
+        >Continue Shopping</a
+      >
+      <a
+        href="/checkout"
+        class="inline-block bg-green-500 text-white py-2 px-4 rounded-lg font-bold hover:bg-green-600 transition duration-200 ml-4"
+        >Checkout</a
+      >
+    </div>
+  {% endif %}
+</div>

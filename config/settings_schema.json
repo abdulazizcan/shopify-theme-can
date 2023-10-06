@@ -1,15 +1,13 @@
-
-        [
-            {
-                "name": "theme_settings",
-                "settings": [
-                    {
-                        "type": "text",
-                        "id": "example_text",
-                        "label": "Example Text Setting",
-                        "default": "This is an example."
-                    }
-                ]
-            }
-        ]
-    
+[ //Example Theme Settings
+  {
+    "name": "theme_settings",
+    "settings": [
+      {
+        "type": "text",
+        "id": "text_setting",
+        "label": "Text Setting",
+        "default": "This is an text settings for Can theme."
+      }
+    ]
+  }
+]
