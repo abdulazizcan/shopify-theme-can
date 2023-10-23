@@ -13,21 +13,22 @@
   </head>
   <body role="main">
     <header>
-      <h1 class="container mx-auto px-20 py-3">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 inline-block mr-2">
-          <path fill="currentColor" d="M12 2c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16.2c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10.8c-1.77 0-3.2 1.43-3.2 3.2s1.43 3.2 3.2 3.2 3.2-1.43 3.2-3.2-1.43-3.2-3.2-3.2z"/>
-        </svg>
-        <span class="text-xl font-bold">{{ 'general.home' | t }}</span>
-      </h1>
       <nav class="container mx-auto px-20 py-3">
         <div class="flex items-center justify-between">
           <div>
-            <a class="text-white text-xl font-bold" href="{{ shop.url }}">{{ shop.name }}</a>
+            {% if settings.custom_logo %}
+              <img src="{{ settings.custom_logo.src | img_url }}" alt="{{ shop.name }} Logo" class="h-8 w-auto">
+            {% else %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 inline-block mr-2">
+                <path fill="currentColor" d="M12 2c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16.2c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10.8c-1.77 0-3.2 1.43-3.2 3.2s1.43 3.2 3.2 3.2 3.2-1.43 3.2-3.2-1.43-3.2-3.2-3.2z"/>
+              </svg>
+              <a class="text-orange-400 text-xl font-bold" href="{{ shop.url }}">{{ shop.name }}</a>
+            {% endif %}
           </div>
           <div class="flex items-center">
             {% for link in linklists['main-menu'].links %}
               <a
-                class="text-gray-300 hover:text-white px-3 py-2 {{ link.active ? 'text-white font-bold' : '' }}"
+                class="text-orange-400 hover:text-stone-950 px-5 py-2 {{ link.active ? 'text-white font-bold' : '' }}"
                 href="{{ link.url }}"
               >
                 {{- link.title -}}

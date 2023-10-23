@@ -9,5 +9,15 @@
         "default": "This is an text settings for Can theme."
       }
     ]
+  },
+  {
+    "name": "Store Settings",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "custom_logo",
+        "label": "Custom Logo"
+      }
+    ]
   }
 ]

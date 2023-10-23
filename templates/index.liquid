@@ -1,35 +1,37 @@
 {% layout 'theme' %}
 
-<div class="container mx-auto py-6">
-  <h1 class="text-2xl font-bold mb-6">Welcome to {{ shop.name }}</h1>
-  <p class="mb-6">This is the homepage of your Shopify store.</p>
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<div class="container mx-auto py-12 px-6 lg:px-0">
+  <h1 class="text-3xl font-extrabold mb-8 text-gray-800">Welcome to {{ shop.name }}</h1>
+  <p class="text-lg mb-8 text-gray-600">Explain the company.</p>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
     {% for product in collections.frontpage.products %}
-      <div class="col-span-1">
-        <a href="{{ product.url }}" class="block">
+      <div class="col-span-1 shadow-lg hover:shadow-xl transition-shadow duration-200 ease-in transform hover:scale-105">
+        <a href="{{ product.url }}" class="block p-4 bg-white hover:bg-gray-50">
           <img
             src="{{ product.featured_image.src | img_url: 'medium' }}"
             alt="{{ product.featured_image.alt }}"
-            class="w-full h-auto mb-2"
+            class="w-full h-auto mb-4 rounded-md"
           >
-          <h3 class="text-lg font-bold mb-2">{{ product.title }}</h3>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700">{{ product.title }}</h3>
           <span class="text-gray-900 font-bold">{{ product.price | money }}</span>
         </a>
       </div>
     {% endfor %}
   </div>
-  <div class="mt-12">
-    <h2 class="text-xl font-bold mb-6">Featured Collection</h2>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+  <div class="mt-16">
+    <h2 class="text-2xl font-extrabold mb-8 text-gray-800">Featured Collection</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
       {% for product in collections.featured.products %}
-        <div class="col-span-1">
-          <a href="{{ product.url }}" class="block">
+        <div class="col-span-1 shadow-lg hover:shadow-xl transition-shadow duration-200 ease-in transform hover:scale-105">
+          <a href="{{ product.url }}" class="block p-4 bg-white hover:bg-gray-50">
             <img
               src="{{ product.featured_image.src | img_url: 'medium' }}"
               alt="{{ product.featured_image.alt }}"
-              class="w-full h-auto mb-2"
+              class="w-full h-auto mb-4 rounded-md"
             >
-            <h3 class="text-lg font-bold mb-2">{{ product.title }}</h3>
+            <h3 class="text-lg font-semibold mb-2 text-gray-700">{{ product.title }}</h3>
             <span class="text-gray-900 font-bold">{{ product.price | money }}</span>
           </a>
         </div>
